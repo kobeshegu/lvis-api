@@ -34,10 +34,10 @@ def main(args):
         img = lvis.load_imgs([imgId])[0]
         annIds = lvis.get_ann_ids(img_ids=[img['id']], cat_ids=catIds, area_rng=None)
         anns = lvis.load_anns(annIds)
-        pdb.set_trace()
+     #   pdb.set_trace()
         if len(annIds) > 0:
             mask = lvis.ann_to_mask(anns[0]) * anns[0]['category_id']
-            pdb.set_trace()
+      #      pdb.set_trace()
             for i in range(len(anns) - 1):
                 mask += lvis.ann_to_mask(anns[i + 1]) * anns[i + 1]['category_id']
             img_origin_path = os.path.join(args.input_dir, 'train2017', img['coco_url'][-16:])
@@ -62,7 +62,7 @@ def main(args):
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_dir", default="../../data/LVIS/lvis_v1", type=str, help="img folder")
-    parser.add_argument("--save_dir", default="../../data/Processed_LVIS", type=str, help="save images folder")
+    parser.add_argument("--save_dir", default="../../data/Processed_LVIS_Lmode", type=str, help="save images folder")
     parser.add_argument("--annotation_file", default="../../data/LVIS/lvis_v1/annotations", type=str, help="img folder")                      
     parser.add_argument("--split", default="train", type=str,
                         help="train2017 or val2017")
