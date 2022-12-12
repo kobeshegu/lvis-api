@@ -22,7 +22,7 @@ def save_colored_mask(mask, save_path):
 def main(args):
     annotation_file = os.path.join(args.annotation_file, 'lvis_v1_{}.json'.format(args.split))
     os.makedirs(os.path.join(args.save_dir, 'Mask_Classes'), exist_ok=True)
-    os.makedirs(os.path.join(args.save_dir, 'Mask_Images_CV2'), exist_ok=True)
+    #os.makedirs(os.path.join(args.save_dir, 'Mask_Images_CV2'), exist_ok=True)
     os.makedirs(os.path.join(args.save_dir, 'Mask_Images'), exist_ok=True)
     #os.makedirs(os.path.join(args.save_dir, 'Mask_Images_Stack'), exist_ok=True)
     #os.makedirs(os.path.join(args.save_dir, 'Matched_Ori_Images'), exist_ok=True)
