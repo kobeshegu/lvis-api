@@ -25,7 +25,7 @@ def main(args):
     #os.makedirs(os.path.join(args.save_dir, 'Mask_Images_CV2'), exist_ok=True)
     os.makedirs(os.path.join(args.save_dir, 'Mask_Images'), exist_ok=True)
     #os.makedirs(os.path.join(args.save_dir, 'Mask_Images_Stack'), exist_ok=True)
-    #os.makedirs(os.path.join(args.save_dir, 'Matched_Ori_Images'), exist_ok=True)
+    os.makedirs(os.path.join(args.save_dir, 'Matched_Ori_Images'), exist_ok=True)
     lvis = LVIS(annotation_file)
     catIds = lvis.get_cat_ids() # 1203 
     imgIds = lvis.get_img_ids() # 19809
@@ -53,7 +53,7 @@ def main(args):
                     mask += lvis.ann_to_mask(anns[i + 1]) * anns[i + 1]['category_id']
                 img_origin_path = os.path.join(args.input_dir, 'train2017', img['coco_url'][-16:])
                 seg_output_path = os.path.join(args.save_dir, 'Mask_Classes', img['coco_url'][-16:].replace('.jpg', '.png'))
-                #img_output_path = os.path.join(args.save_dir, 'Matched_Ori_Images', img['coco_url'][-16:])
+                img_output_path = os.path.join(args.save_dir, 'Matched_Ori_Images', img['coco_url'][-16:])
                 if os.path.exists(img_origin_path):
                     original_img = np.array(Image.open(os.path.join(args.input_dir, 'train2017', img['coco_url'][-16:])).convert("RGB"))
                     original_img = np.transpose(original_img, [2,0,1])
@@ -68,7 +68,7 @@ def main(args):
                         save_colored_mask(mask, seg_output_path)
                     else:
                         cv2.imwrite(seg_output_path, mask)
-                    # shutil.copy(img_origin_path, img_output_path)
+                    shutil.copy(img_origin_path, img_output_path)
         else:
             if len(annIds) > 0:
                 print(rare_class_count)
@@ -78,7 +78,7 @@ def main(args):
                     mask += lvis.ann_to_mask(anns[i + 1]) * anns[i + 1]['category_id']
                 img_origin_path = os.path.join(args.input_dir, 'train2017', img['coco_url'][-16:])
                 seg_output_path = os.path.join(args.save_dir, 'Mask_Classes', img['coco_url'][-16:].replace('.jpg', '.png'))
-                #img_output_path = os.path.join(args.save_dir, 'Matched_Ori_Images', img['coco_url'][-16:])
+                img_output_path = os.path.join(args.save_dir, 'Matched_Ori_Images', img['coco_url'][-16:])
                 if os.path.exists(img_origin_path):
                     original_img = np.array(Image.open(os.path.join(args.input_dir, 'train2017', img['coco_url'][-16:])).convert("RGB"))
                     original_img = np.transpose(original_img, [2,0,1])
@@ -93,7 +93,7 @@ def main(args):
                         save_colored_mask(mask, seg_output_path)
                     else:
                         cv2.imwrite(seg_output_path, mask)
-                    # shutil.copy(img_origin_path, img_output_path) 
+                    shutil.copy(img_origin_path, img_output_path) 
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_dir", default="../../data/LVIS/lvis_v1", type=str, help="img folder")
